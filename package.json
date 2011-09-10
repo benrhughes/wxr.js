@@ -1,0 +1,17 @@
+{
+  "author": "Ben Hughes <ben@benrhughes.com> (http://benrhughes.com)",
+  "name": "wxr",
+  "description": "Library for writing Wordpress eXtended Rss (Wordpress export) files",
+  "version": "0.0.1",
+  "homepage": "http://hughesoft.com/products/wxr",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/benrhughes/wxr"
+  },
+  "main": "wxr.js",
+  "engines": {
+    "node": "~v0.4.11"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
