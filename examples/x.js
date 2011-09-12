@@ -1,4 +1,4 @@
-var wxr = require('./wxr');
+var wxr = require('../wxr');
 
 var site = new wxr.Site();
 site.title = "Ben's blog";
