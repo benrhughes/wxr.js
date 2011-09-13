@@ -10,4 +10,13 @@ cat.niceName = "stuff";
 
 site.categories.push(cat);
 
-console.log(site.toWXR());
+var post = new wxr.Post();
+post.title = "Ben's first blog post";
+post.name = 'first';
+post.creator = 'Ben';
+
+post.categories.push(cat);
+
+site.posts.push(post);
+
+console.log(site.toWXR().toString({pretty: true}));
