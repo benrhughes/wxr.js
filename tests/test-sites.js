@@ -1,16 +1,6 @@
 var should = require('should');
 var wxr = require('../');
-
-function test(name, fn){
-  try {
-    fn();
-  } catch (err) {
-    console.log('    \x1b[31m%s', name);
-    console.log('    %s\x1b[0m', err.stack);
-    return;
-  }
-  console.log('  √ \x1b[32m%s\x1b[0m', name);
-}
+var test = require('./test').test;
 
 var site = new wxr.Site();
 
@@ -19,6 +9,17 @@ test('Constructor sets generator', function(){
 });
 
 test('Expected properties exist', function(){
-	site.should.have.property('title', '');
-	site.should.have.property('link', '');
+	site.should.have.property('title');
+	site.should.have.property('link');
+	site.should.have.property('description');
+	site.should.have.property('language', 'en');
+	site.should.have.property('pubDate');
+	site.should.have.property('baseSiteURL');
+	site.should.have.property('baseBlogURL');
+
+	site.should.have.property('posts');
+	site.should.have.property('tags');
+	site.should.have.property('categories');
+
+	site.should.respondTo('toWXR');
 });
