@@ -1,0 +1,19 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/home/ben/local/node/bin/npm', 'build', 'wxr' ]
+info using npm@1.0.30
+info using node@v0.5.8-pre
+verbose config file /home/ben/.npmrc
+verbose config file /home/ben/local/node/etc/npmrc
+info build /home/ben/Dropbox/hughesoft/source/dev/exp/wxr/wxr
+ERR! Error: ENOENT, Success '/home/ben/Dropbox/hughesoft/source/dev/exp/wxr/wxr/package.json'
+ERR! Report this *entire* log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Linux 2.6.38-11-generic
+ERR! command "node" "/home/ben/local/node/bin/npm" "build" "wxr"
+ERR! cwd /home/ben/Dropbox/hughesoft/source/dev/exp/wxr
+ERR! node -v v0.5.8-pre
+ERR! npm -v 1.0.30
+verbose exit [ 1, true ]
