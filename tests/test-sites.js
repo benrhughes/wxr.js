@@ -1,7 +1,8 @@
 var should = require('should');
 var wxr = require('../');
 var test = require('./test').test;
-require('../thirdparty/linq');
+//require('../thirdparty/linq');
+var _ = require('underscore');
 
 var site = new wxr.Site();
 
@@ -39,15 +40,19 @@ test('XML Nodes created', function(){
 	var rootNode = doc.children[1];
 	rootNode.should.have.property('name', 'channel');
 
-	var titleNode = rootNode.children[0];	
+	var titleNode = _(rootNode.children)
+					.detect(function(c){ return c.name == 'title';});
+
+	should.exist(titleNode);
+ 	
 	titleNode.should.have.property('name', 'title');	
 
 	var valueNode = titleNode.children[0];
 	valueNode.should.have.property('value', '<![CDATA[my site title]]>');
 
-	var linkNode = Enumerable.From(rootNode.children)
-					.First('$.name == "link"');
+
+	var linkNode = _(rootNode.children)
+					.detect(function(c){ return c.name == 'link';});
 
 	linkNode.should.have.property('name', 'link');
-	
 });
