@@ -1,7 +1,6 @@
 var should = require('should');
 var wxr = require('../');
 var test = require('./test').test;
-//require('../thirdparty/linq');
 var _ = require('underscore');
 
 var site = new wxr.Site();
@@ -53,4 +52,18 @@ test('XML Nodes created', function(){
 					.detect(function(c){ return c.name == 'link';});
 
 	should.exist(linkNode);
+
+	valueNode = linkNode.children[0];
+
+	valueNode.should.have.property('value', site.link);
+
+	var descNode = _(rootNode.children)
+					.detect(function(c){ return c.name == 'description';});
+
+	should.exist(descNode);
+
+	valueNode = descNode.children[0];
+	valueNode.should.have.property('value', '<![CDATA[]]>');
+	
+	 
 });
