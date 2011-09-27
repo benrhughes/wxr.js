@@ -45,8 +45,6 @@ test('XML Nodes created', function(){
 
 	should.exist(titleNode);
  	
-	titleNode.should.have.property('name', 'title');	
-
 	var valueNode = titleNode.children[0];
 	valueNode.should.have.property('value', '<![CDATA[my site title]]>');
 
@@ -54,5 +52,5 @@ test('XML Nodes created', function(){
 	var linkNode = _(rootNode.children)
 					.detect(function(c){ return c.name == 'link';});
 
-	linkNode.should.have.property('name', 'link');
+	should.exist(linkNode);
 });
