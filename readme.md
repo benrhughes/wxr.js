@@ -1,4 +1,6 @@
-### Very early in dev cycle - DOES NOT WORK
+## Very early in dev cycle - DOES NOT WORK
+
+All changes are curretnly being made in the Dev branch until there's something minally useful.
 
 ##WXR node.js module
 
