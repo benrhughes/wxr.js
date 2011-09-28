@@ -25,20 +25,32 @@ test('Expected properties exist', function(){
 	site.should.respondTo('toWXR');
 });
 
-test('XML Nodes created', function(){
+test('XML node created', function(){
 	var site = new wxr.Site();
-
-	site.title = 'my site title';
-	site.link = 'http://blahblahblah.com';
 
 	var doc = site.toWXR();
 	
 	doc.should.have.property('children');
 	doc.children[0].should.have.property('name', '?xml');
+});
+
+test('Channel node created', function(){
+
+	var site = new wxr.Site();
+	var doc = site.toWXR();
 
 	var rootNode = doc.children[1];
 	rootNode.should.have.property('name', 'channel');
+});
 
+test('Title node created', function(){
+	var site = new wxr.Site();
+	
+	site.title = 'my site title';
+	var doc = site.toWXR();
+	
+	var rootNode = doc.children[1];
+	
 	var titleNode = _(rootNode.children)
 					.detect(function(c){ return c.name == 'title';});
 
@@ -46,8 +58,16 @@ test('XML Nodes created', function(){
  	
 	var valueNode = titleNode.children[0];
 	valueNode.should.have.property('value', '<![CDATA[my site title]]>');
-
-
+});
+test('Link node created', function(){
+	var site = new wxr.Site();
+	
+	site.link = 'http://blahblahblah.com';
+	
+	var doc = site.toWXR();
+	
+	var rootNode = doc.children[1];
+	
 	var linkNode = _(rootNode.children)
 					.detect(function(c){ return c.name == 'link';});
 
@@ -56,14 +76,22 @@ test('XML Nodes created', function(){
 	valueNode = linkNode.children[0];
 
 	valueNode.should.have.property('value', site.link);
+});
 
+test('Description node created', function(){
+	var site = new wxr.Site();
+	
+	site.description = "Ben's awesome site";
+	
+	var doc = site.toWXR();
+	
+	var rootNode = doc.children[1];
+	
 	var descNode = _(rootNode.children)
 					.detect(function(c){ return c.name == 'description';});
 
 	should.exist(descNode);
 
 	valueNode = descNode.children[0];
-	valueNode.should.have.property('value', '<![CDATA[]]>');
-	
-	 
+	valueNode.should.have.property('value', "<![CDATA[Ben\'s awesome site]]>");
 });
