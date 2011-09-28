@@ -49,49 +49,39 @@ test('Title node created', function(){
 	site.title = 'my site title';
 	var doc = site.toWXR();
 	
-	var rootNode = doc.children[1];
-	
-	var titleNode = _(rootNode.children)
+	var node = _(doc.children[1].children)
 					.detect(function(c){ return c.name == 'title';});
 
-	should.exist(titleNode);
+	should.exist(node);
  	
-	var valueNode = titleNode.children[0];
-	valueNode.should.have.property('value', '<![CDATA[my site title]]>');
+	var value = node.children[0];
+	value.should.have.property('value', '<![CDATA[my site title]]>');
 });
+
 test('Link node created', function(){
 	var site = new wxr.Site();
-	
 	site.link = 'http://blahblahblah.com';
 	
-	var doc = site.toWXR();
-	
-	var rootNode = doc.children[1];
-	
-	var linkNode = _(rootNode.children)
+  	var doc = site.toWXR();
+	var node = _(doc.children[1].children)
 					.detect(function(c){ return c.name == 'link';});
 
-	should.exist(linkNode);
+	should.exist(node);
 
-	valueNode = linkNode.children[0];
-
-	valueNode.should.have.property('value', site.link);
+	value = node.children[0];
+	value.should.have.property('value', site.link);
 });
 
 test('Description node created', function(){
 	var site = new wxr.Site();
-	
 	site.description = "Ben's awesome site";
 	
 	var doc = site.toWXR();
-	
-	var rootNode = doc.children[1];
-	
-	var descNode = _(rootNode.children)
+	var node = _(doc.children[1].children)
 					.detect(function(c){ return c.name == 'description';});
 
-	should.exist(descNode);
+	should.exist(node);
 
-	valueNode = descNode.children[0];
-	valueNode.should.have.property('value', "<![CDATA[Ben\'s awesome site]]>");
+	value = node.children[0];
+	value.should.have.property('value', "<![CDATA[Ben\'s awesome site]]>");
 });
