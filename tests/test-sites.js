@@ -1,3 +1,7 @@
+// 
+// Tests to ensure that the site WXR is created properly. NB, for the most part
+// we're checking the JSON, not the resultant XML (produced by xmlbuilder)
+//
 var should = require('should');
 var wxr = require('../');
 var test = require('./test').test;
