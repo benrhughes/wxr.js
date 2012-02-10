@@ -46,7 +46,7 @@ comment.author.ip = '127.0.0.1';
 comment.userId = 12345;
 comment.approved = 1;
 comment.date = '2008-05-16 22:49:10';
-comment.gmtDate = '2008-05-16 22:49:10'
+comment.gmtDate = '2008-05-16 22:49:10';
 
 post.comments.push(comment);
 
