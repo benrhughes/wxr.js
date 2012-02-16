@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel>
+  <title><![CDATA[Ben's wordpress site]]></title>
+  <link>http://benswordpresssite.wordpress.com</link>
+  <description><![CDATA[Just another Wordpress blog]]></description>
+  <language>en</language>
+  <generator>http://github.com/benrhughes/wrx.js</generator>
+  <pubDate>Fri, 11 Jan 2008 20:23:05 +0000</pubDate>
+  <base_site_url>http://mysite.com/blog</base_site_url>
+  <base_blog_url/>
+<post>
+  <title><![CDATA[About this site]]></title>
+  <link>http://benswordpresssite.wordpress.com/about/</link>
+  <pubDate>Fri, 11 Jan 2008 20:23:05 +0000</pubDate>
+  <dc:creator>Ben</dc:creator>
+  <description><![CDATA[My about page]]></description>
+  <content:encoded><![CDATA[This is CDATA encoded contents of my about page]]></content:encoded>
+  <wp:post_id/>
+  <wp:post_date>Fri, 11 Jan 2008 20:23:05 +0000</wp:post_date>
+  <wp:post_date_gmt>Fri, 11 Jan 2008 20:23:05 +0000</wp:post_date_gmt>
+  <wp:post_name>about</wp:post_name>
+  <wp:status/>
+  <wp:comment_status>open</wp:comment_status>
+  <wp:post_parent/>
+  <wp:post_type>page</wp:post_type>
+  <wp:category>
+    <wp:category_nicename/>
+    <wp:category_parent name="undefined" niceName="undefined" parentCategory="[object Object]"/>
+    <wp:cat_name><![CDATA[admin]]></wp:cat_name>
+  </wp:category>
+  <wp:comment/>
+</post>
+</channel>

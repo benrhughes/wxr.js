@@ -13,7 +13,7 @@ site.link = 'http://blahblahblah.com';
 site.description = "Ben's awesome site";
 site.pubDate = 'Fri, 11 Jan 2008 20:23:05 +0000';
 site.baseSiteURL = 'http://mysite.com';	
-site.baseSiteURL = 'http://mysite.com/blog';	
+site.baseBlogURL = 'http://mysite.com/blog';	
 
 var doc = site.toWXR();
 
@@ -36,14 +36,14 @@ test('Title node created', function(){
 					.detect(function(c){ return c.name == 'title';});
 
 	should.exist(node);
- 	
+
 	var value = node.children[0];
 	value.should.have.property('value', '<![CDATA[my site title]]>');
 });
 
 test('Link node created', function(){
 	
-  	var doc = site.toWXR();
+    var doc = site.toWXR();
 	var node = _(doc.children[1].children)
 					.detect(function(c){ return c.name == 'link';});
 

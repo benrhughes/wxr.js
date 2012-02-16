@@ -11,6 +11,8 @@ site.link = 'http://benswordpresssite.wordpress.com';
 site.description = 'Just another Wordpress blog';
 site.language = 'en';
 site.pubDate = 'Fri, 11 Jan 2008 20:23:05 +0000';
+site.baseSiteURL = 'http://mysite.com';    
+site.baseBlogURL = 'http://mysite.com/blog';	
 
 var post = new wxr.Post();
 post.title = 'About this site';
