@@ -8,6 +8,10 @@ var test = require('./test').test;
 var _ = require('underscore');
 
 var site = new wxr.Site();
+site.title = "Test";
+site.link = 'http://benswordpresssite.wordpress.com';
+site.description = 'Just another Wordpress blog';
+site.pubDate = 'Fri, 11 Jan 2008 20:23:05 +0000';
 
 test('Constructor sets generator', function(){
 	site.should.have.property('generator', 'wxr.js');
@@ -18,8 +22,6 @@ test('Expected properties exist', function(){
 });
 
 test('XML node created', function(){
-	var site = new wxr.Site();
-
 	var doc = site.toWXR();
 	
 	doc.should.have.property('children');
@@ -27,8 +29,6 @@ test('XML node created', function(){
 });
 
 test('Channel node created', function(){
-
-	var site = new wxr.Site();
 	var doc = site.toWXR();
 
 	var rootNode = doc.children[1];
@@ -36,7 +36,6 @@ test('Channel node created', function(){
 });
 
 test('Title node created', function(){
-	var site = new wxr.Site();
 	
 	site.title = 'my site title';
 	var doc = site.toWXR();
@@ -51,7 +50,6 @@ test('Title node created', function(){
 });
 
 test('Link node created', function(){
-	var site = new wxr.Site();
 	site.link = 'http://blahblahblah.com';
 	
   	var doc = site.toWXR();
@@ -65,7 +63,6 @@ test('Link node created', function(){
 });
 
 test('Description node created', function(){
-	var site = new wxr.Site();
 	site.description = "Ben's awesome site";
 	
 	var doc = site.toWXR();
@@ -79,7 +76,6 @@ test('Description node created', function(){
 });
 
 test('Language node created', function(){
-	var site = new wxr.Site();
 	
 	var doc = site.toWXR();
 	var node = _(doc.children[1].children)
@@ -92,7 +88,6 @@ test('Language node created', function(){
 });
 
 test('Generator node created', function(){
-	var site = new wxr.Site();
 	
 	var doc = site.toWXR();
 	var node = _(doc.children[1].children)
@@ -105,7 +100,6 @@ test('Generator node created', function(){
 });
 
 test('PubDate node created', function(){
-	var site = new wxr.Site();
 	site.pubDate = Date.now();	
 	
 	var doc = site.toWXR();
@@ -119,7 +113,6 @@ test('PubDate node created', function(){
 });
 
 test('Base site URL node created', function(){
-	var site = new wxr.Site();
 	site.baseSiteURL = 'http://mysite.com';	
 	
 	var doc = site.toWXR();
@@ -133,7 +126,6 @@ test('Base site URL node created', function(){
 });
 
 test('Base blog URL node created', function(){
-	var site = new wxr.Site();
 	site.baseSiteURL = 'http://mysite.com/blog';	
 	
 	var doc = site.toWXR();
