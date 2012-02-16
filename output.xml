@@ -6,8 +6,8 @@
   <language>en</language>
   <generator>http://github.com/benrhughes/wrx.js</generator>
   <pubDate>Fri, 11 Jan 2008 20:23:05 +0000</pubDate>
-  <base_site_url>http://mysite.com/blog</base_site_url>
-  <base_blog_url/>
+  <base_site_url>http://mysite.com</base_site_url>
+  <base_blog_url>http://mysite.com/blog</base_blog_url>
 <post>
   <title><![CDATA[About this site]]></title>
   <link>http://benswordpresssite.wordpress.com/about/</link>
