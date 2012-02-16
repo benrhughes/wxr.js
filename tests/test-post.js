@@ -1,8 +1,6 @@
-var should = require('should');
+require('should');
 var wxr = require('../');
 var test = require('./test').test;
-var _ = require('underscore');
-
 var post = new wxr.Post();
 
 test("Expected properties exist", function(){
