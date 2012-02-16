@@ -25,7 +25,7 @@
   <wp:post_type>page</wp:post_type>
   <wp:category>
     <wp:category_nicename/>
-    <wp:category_parent name="undefined" niceName="undefined" parentCategory="[object Object]"/>
+    <wp:category_parent/>
     <wp:cat_name><![CDATA[admin]]></wp:cat_name>
   </wp:category>
   <wp:comment/>

@@ -1,7 +1,5 @@
-var should = require('should');
 var wxr = require('../');
 var test = require('./test').test;
-var _ = require('underscore');
 
 var site = new wxr.Site();
 
