@@ -18,7 +18,7 @@ site.baseBlogURL = 'http://mysite.com/blog';
 var doc = site.toWXR();
 
 test('Constructor sets generator', function(){
-	site.should.have.property('generator', 'http://github.com/benrhughes/wrx.js');
+	site.should.have.property('generator', 'http://github.com/benrhughes/wxr.js');
 });
 
 test('XML node created', function(){	
@@ -73,6 +73,16 @@ test('Language node created', function(){
 	value.should.have.property('value', 'en'); 
 });
 
+test('wxr_version node created', function(){
+	var node = _(doc.children[1].children)
+					.detect(function(c){ return c.name == 'wp:wxr_version';});
+
+	should.exist(node);
+
+	var value = node.children[0];
+	value.should.have.property('value', '1.1'); 
+});
+
 test('Generator node created', function(){
 	var node = _(doc.children[1].children)
 					.detect(function(c){ return c.name == 'generator';});
@@ -80,7 +90,7 @@ test('Generator node created', function(){
 	should.exist(node);
 
 	var value = node.children[0];
-	value.should.have.property('value', 'http://github.com/benrhughes/wrx.js'); 
+	value.should.have.property('value', 'http://github.com/benrhughes/wxr.js'); 
 });
 
 test('PubDate node created', function(){
@@ -95,7 +105,7 @@ test('PubDate node created', function(){
 
 test('Base site URL node created', function(){
 	var node = _(doc.children[1].children)
-					.detect(function(c){ return c.name == 'base_site_url';});
+					.detect(function(c){ return c.name == 'wp:base_site_url';});
 
 	should.exist(node);
 
@@ -105,7 +115,7 @@ test('Base site URL node created', function(){
 
 test('Base blog URL node created', function(){
 	var node = _(doc.children[1].children)
-					.detect(function(c){ return c.name == 'base_blog_url';});
+					.detect(function(c){ return c.name == 'wp:base_blog_url';});
 
 	should.exist(node);
 
