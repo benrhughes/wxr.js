@@ -20,7 +20,7 @@ post.postId = 2;
 post.date = site.pubDate;
 post.gmtDate = post.date;
 post.commentStatus = 'open';
-post.type = 'page'; // page || post?
+post.type = 'post'; // page || post
 post.parentId = 0;
 
 post.categories.push('admin');

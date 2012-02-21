@@ -1,9 +1,7 @@
-### Very early in dev cycle - DOES NOT WORK
-
 ##WXR node.js module
 
-This module wraps access to the Wordpress eXtended Rss format (WXR) for node.js. It allows the easy reading and writing of WRX files.
+This module creates files in the Wordpress eXtended Rss format (WXR). Site and Post exporting are currently (mostly) working, the rest is being worked on. It is still under heavy development so use with caution.
 
 See demo_wxr.js for an example of what the API may look like when it's done.
 
-It it licensed under the MIT License.
+Licensed under the MIT License.
