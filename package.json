@@ -12,6 +12,11 @@
   "engines": {
     "node": "~v0.4.11"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "underscore": "~1.4.2",
+    "xmlbuilder": "~0.4.2"
+  },
+  "devDependencies": {
+    "should": "~1.2.1"
+  }
 }

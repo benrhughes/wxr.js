@@ -1,10 +1,9 @@
+// public stuff
 exports.generate = generate;
 exports.site = site;
 exports.tag = tag;
 exports.post = post;
 exports.category = category;
-
-exports.hello = function(){console.log("hello");}
 
 // a bunch of helper functions to construct a site object in the form 
 // that generateWXR expects
@@ -28,13 +27,13 @@ function category(name, slug){
 function site(title, description, posts){
 	return {title: title, 
 			description: description, 
-			posts: posts || []};
+			posts: posts || [],
 }
 
 // a function to generate valid WXR for a site
 function generate(site){
 	var _ = require("underscore");
-	var builder = require("xmlbuilder");
+	var xml = require("xmlbuilder");
 
 	function addPost(post){
 	}
@@ -56,9 +55,7 @@ function generate(site){
 	}
 
 	//lets get started, shall well
-	var builder = require('xmlbuilder');
-
-	var doc = builder.create();
+	var doc = xml.create();
 
 	var rss = doc.begin('rss', {version: '1.0', encoding: 'UTF-8'});
 
@@ -74,5 +71,7 @@ function generate(site){
 		
 	for(var tag in mapMany(function(post){return post.tags;}, site.posts))
 		addTag(tag);
-
+	
+	for(var post in site.posts)
+		addPost(post);
 }
