@@ -1,20 +1,41 @@
+exports.generate = generate;
+exports.site = site;
+exports.tag = tag;
+exports.post = post;
+exports.category = category;
+
+exports.hello = function(){console.log("hello");}
+
 // a bunch of helper functions to construct a site object in the form 
 // that generateWXR expects
 
 function post(title, description, author, pubDate, content){
+	return {title: title, 
+			description: description, 
+			author: author,
+			puDate: pubDate,
+			content: content};
 }
 
 function tag(name, slug){
+	return {name: name, slug: slug};
 }
 
 function category(name, slug){
+	return {name: name, slug: slug};
 }
 
 function site(title, description, posts){
+	return {title: title, 
+			description: description, 
+			posts: posts || []};
 }
 
 // a function to generate valid WXR for a site
-function generateWXR(site){
+function generate(site){
+	var _ = require("underscore");
+	var builder = require("xmlbuilder");
+
 	function addPost(post){
 	}
 
