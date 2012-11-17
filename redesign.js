@@ -6,7 +6,7 @@ exports.post = post;
 exports.category = category;
 
 // a bunch of helper functions to construct a site object in the form 
-// that generateWXR expects
+// that 'generate' expects
 
 function post(title, description, author, pubDate, content){
 	return {title: title, 

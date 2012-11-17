@@ -3,7 +3,7 @@
   "name": "wxr",
   "description": "Library for writing Wordpress eXtended Rss (Wordpress export) files",
   "version": "0.0.1",
-  "homepage": "http://hughesoft.com/products/wxr",
+  "homepage": "http://github.com/benrhughes/wxr.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/benrhughes/wxr"
