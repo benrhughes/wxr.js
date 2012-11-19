@@ -30,7 +30,7 @@ function category(name, slug){
 function site(title, description, posts){
 	return {title: title, 
 			description: description, 
-			posts: posts || [],
+			posts: posts || []}
 }
 
 // a function to generate valid WXR for a site
@@ -40,7 +40,7 @@ function generate(site){
 
 	function addPost(post){
 		//post(title, description, author, pubDate, content, status, categories, tags)
-		var dateString = pubDate;
+		var dateString = post.pubDate;
 
 		var node = channel.ele('item')
 			.ele('title').dat(post.title).up()
@@ -61,8 +61,9 @@ function generate(site){
 
 	}
 
+
 	function addPostCategory(post, cat, domain){
-		post.ele("category", {nicename: cat.name, domain: domain );
+		post.ele("category", {nicename: cat.name, domain: domain} );
 	}
 
 	function addSiteCategory(cat){
@@ -76,31 +77,31 @@ function generate(site){
 				.ele('wp:tag_slug', tag.slug).up()
 				.ele('wp:tag_name').dat(tag.name).up();
 	}
-	
-	function mapMany(func, array){
-		return _.fatten(_.map(func, array),true);
+
+	function mapMany(array, func){
+		return _.flatten(_.map(array, func),true);
 	}
 
 	//lets get started, shall well
-	var doc = xml.create();
+	var doc = xml.create('rss', {version: '1.0', encoding: 'UTF-8'});
 
-	var rss = doc.begin('rss', {version: '1.0', encoding: 'UTF-8'});
-
-	var channel = rss.ele('channel');
+	var channel = doc.ele('channel');
 	channel.ele('title').dat(site.title).up()
 			.ele('description').dat(site.description).up()
 			.ele('language', 'en').up()
 			.ele('wp:wxr_version', '1.1').up()
 			.ele('generator', 'wxr.js').up();
 
-	for(var cat in mapMany(function(post){return post.categories;}, site.posts))
-		addSiteCategory(cat);
+	var categories = mapMany(site.posts, function(post){return post.categories});
+	_.each(categories, addSiteCategory);
 		
-	for(var tag in mapMany(function(post){return post.tags;}, site.posts))
-		addSiteTag(tag);
 	
-	for(var post in site.posts)
-		addPost(post);
+	var tags = mapMany(site.posts, function(post){return post.tags;});
+	_.each(tags, addSiteTag);
+	
+	_.each(site.posts, addPost);
+
+	doc.end({pretty: true});
 
 	return doc;
 }
