@@ -1,15 +1,106 @@
-exports.Site = require('./lib/site').Site;
-exports.Post = require('./lib/post').Post;
-exports.Comment = require('./lib/comment').Comment;
-exports.Attachment = require('./lib/attachment').Attachment;
-exports.Category = require('./lib/category').Category;
-exports.Tag = require('./lib/category').Tag;
+// public stuff
+exports.generate = generate;
+exports.site = site;
+exports.tag = tag;
+exports.post = post;
+exports.category = category;
 
-var fs = require('fs');
+// a bunch of helper functions to construct a site object in the form 
+// that 'generate' expects
 
-exports.export = function(site, file){
+function post(title, description, author, pubDate, content, status, categories, tags){
+	return {title: title, 
+			description: description, 
+			author: author,
+			puDate: pubDate,
+			content: content,
+			status: status,
+			categories: categories || [],
+			tags: tags || []};
+}
+
+function tag(name, slug){
+	return {name: name, slug: slug};
+}
+
+function category(name, slug){
+	return {name: name, slug: slug};
+}
+
+function site(title, description, posts){
+	return {title: title, 
+			description: description, 
+			posts: posts || [],
+}
+
+// a function to generate valid WXR for a site
+function generate(site){
+	var _ = require("underscore");
+	var xml = require("xmlbuilder");
+
+	function addPost(post){
+		//post(title, description, author, pubDate, content, status, categories, tags)
+		var dateString = pubDate;
+
+		var node = channel.ele('item')
+			.ele('title').dat(post.title).up()
+			.ele('pubDate', dateString).up()
+			.ele('dc:creator', post.author).up()
+			.ele('description').dat(post.description).up()
+			.ele('content:encoded').dat(post.content).up()
+			.ele('wp:post_date', dateString).up()
+			.ele('wp:post_date_gmt', dateString).up()
+			.ele('wp:post_type', 'post').up()
+			.ele('wp:status', post.status).up();
+		
+		for(var cat in categories)
+			addPostCategory(node, cat, 'category');
+
+		for(var tag in tags)
+			addTag(node, tag, 'post_tag');
+
+	}
+
+	function addPostCategory(post, cat, domain){
+		post.ele("category", {nicename: cat.name, domain: domain );
+	}
+
+	function addSiteCategory(cat){
+		channel.ele('wp:category')
+				.ele('wp:category_nicename', cat.slug).up()
+				.ele('wp:cat_name').dat(cat.name).up();
+	}
+
+	function addSiteTag(tag, node){
+		channel.ele('wp:tag')
+				.ele('wp:tag_slug', tag.slug).up()
+				.ele('wp:tag_name').dat(tag.name).up();
+	}
 	
-	fs.writeFile(file, site.toWXR().toString({ pretty:true }));
+	function mapMany(func, array){
+		return _.fatten(_.map(func, array),true);
+	}
 
-	console.log('Exported to ' + file);
-};
+	//lets get started, shall well
+	var doc = xml.create();
+
+	var rss = doc.begin('rss', {version: '1.0', encoding: 'UTF-8'});
+
+	var channel = rss.ele('channel');
+	channel.ele('title').dat(site.title).up()
+			.ele('description').dat(site.description).up()
+			.ele('language', 'en').up()
+			.ele('wp:wxr_version', '1.1').up()
+			.ele('generator', 'wxr.js').up();
+
+	for(var cat in mapMany(function(post){return post.categories;}, site.posts))
+		addSiteCategory(cat);
+		
+	for(var tag in mapMany(function(post){return post.tags;}, site.posts))
+		addSiteTag(tag);
+	
+	for(var post in site.posts)
+		addPost(post);
+
+	return doc;
+}
