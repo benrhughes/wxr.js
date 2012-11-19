@@ -52,13 +52,9 @@ function generate(site){
 			.ele('wp:post_date_gmt', dateString).up()
 			.ele('wp:post_type', 'post').up()
 			.ele('wp:status', post.status).up();
-		
-		for(var cat in categories)
-			addPostCategory(node, cat, 'category');
 
-		for(var tag in tags)
-			addTag(node, tag, 'post_tag');
-
+		_.each(post.categories, function(c){addPostCategory(node, c, 'category')});
+		_.each(post.tags, function(t){addPostCategory(node, t, 'post_tag')});
 	}
 
 
@@ -78,11 +74,7 @@ function generate(site){
 				.ele('wp:tag_name').dat(tag.name).up();
 	}
 
-	function mapMany(array, func){
-		return _.flatten(_.map(array, func),true);
-	}
-
-	//lets get started, shall well
+	//lets get started, shall we
 	var doc = xml.create('rss', {version: '1.0', encoding: 'UTF-8'});
 
 	var channel = doc.ele('channel');
@@ -92,16 +84,15 @@ function generate(site){
 			.ele('wp:wxr_version', '1.1').up()
 			.ele('generator', 'wxr.js').up();
 
-	var categories = mapMany(site.posts, function(post){return post.categories});
+	var categories = _.flatten(_.pluck(site.posts, 'categories')); 
 	_.each(categories, addSiteCategory);
 		
-	
-	var tags = mapMany(site.posts, function(post){return post.tags;});
+	var tags = _.flatten(_.pluck(site.posts, 'tags')); 
 	_.each(tags, addSiteTag);
 	
 	_.each(site.posts, addPost);
 
-	doc.end({pretty: true});
+	doc.end();
 
-	return doc;
+	return doc.toString({pretty:true});
 }
