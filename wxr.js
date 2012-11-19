@@ -7,12 +7,11 @@ exports.category = category;
 
 // a bunch of helper functions to construct a site object in the form 
 // that 'generate' expects
-
 function post(title, description, author, pubDate, content, status, categories, tags){
 	return {title: title, 
 			description: description, 
 			author: author,
-			puDate: pubDate,
+			pubDate: pubDate instanceof Date ? pubDate.toString() : pubDate,
 			content: content,
 			status: status,
 			categories: categories || [],
@@ -40,26 +39,23 @@ function generate(site){
 
 	function addPost(post){
 		//post(title, description, author, pubDate, content, status, categories, tags)
-		var dateString = post.pubDate;
-
 		var node = channel.ele('item')
 			.ele('title').dat(post.title).up()
-			.ele('pubDate', dateString).up()
+			.ele('post.pubDate', post.pubDate).up()
 			.ele('dc:creator', post.author).up()
 			.ele('description').dat(post.description).up()
 			.ele('content:encoded').dat(post.content).up()
-			.ele('wp:post_date', dateString).up()
-			.ele('wp:post_date_gmt', dateString).up()
+			.ele('wp:post_date', post.pubDate).up()
+			.ele('wp:post_date_gmt', post.pubDate).up()
 			.ele('wp:post_type', 'post').up()
 			.ele('wp:status', post.status).up();
 
-		_.each(post.categories, function(c){addPostCategory(node, c, 'category')});
-		_.each(post.tags, function(t){addPostCategory(node, t, 'post_tag')});
-	}
+		function add(cat, domain){
+			node.ele("category", {nicename: cat.name, domain: domain} );
+		}
 
-
-	function addPostCategory(post, cat, domain){
-		post.ele("category", {nicename: cat.name, domain: domain} );
+		_.each(post.categories, function(c){add(c, 'category')});
+		_.each(post.tags, function(t){addPost(t, 'post_tag')});
 	}
 
 	function addSiteCategory(cat){
