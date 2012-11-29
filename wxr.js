@@ -55,16 +55,16 @@ function generate(site){
 		}
 
 		_.each(post.categories, function(c){add(c, 'category')});
-		_.each(post.tags, function(t){addPost(t, 'post_tag')});
+		_.each(post.tags, function(t){add(t, 'post_tag')});
 	}
 
-	function addSiteCategory(cat){
+	function addCat(cat){
 		channel.ele('wp:category')
 				.ele('wp:category_nicename', cat.slug).up()
 				.ele('wp:cat_name').dat(cat.name).up();
 	}
 
-	function addSiteTag(tag, node){
+	function addTag(tag){
 		channel.ele('wp:tag')
 				.ele('wp:tag_slug', tag.slug).up()
 				.ele('wp:tag_name').dat(tag.name).up();
@@ -73,18 +73,16 @@ function generate(site){
 	//lets get started, shall we
 	var doc = xml.create('rss', {version: '1.0', encoding: 'UTF-8'});
 
-	var channel = doc.ele('channel');
-	channel.ele('title').dat(site.title).up()
-			.ele('description').dat(site.description).up()
-			.ele('language', 'en').up()
-			.ele('wp:wxr_version', '1.1').up()
-			.ele('generator', 'wxr.js').up();
+	var channel = doc.ele('channel')
+					.ele('title').dat(site.title).up()
+					.ele('description').dat(site.description).up()
+					.ele('language', 'en').up()
+					.ele('wp:wxr_version', '1.1').up()
+					.ele('generator', 'wxr.js').up();
 
-	var categories = _.flatten(_.pluck(site.posts, 'categories')); 
-	_.each(categories, addSiteCategory);
+	_.each(_.flatten(_.pluck(site.posts, 'categories')), addCat);
 		
-	var tags = _.flatten(_.pluck(site.posts, 'tags')); 
-	_.each(tags, addSiteTag);
+	_.each(_.flatten(_.pluck(site.posts, 'tags')), addTag); 
 	
 	_.each(site.posts, addPost);
 
